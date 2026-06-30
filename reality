@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reality TV: 2004–2024</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #fafaf8;
+    color: #1a1a18;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem 3rem;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    color: #1a1a18;
+  }
+
+  .chart-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+  }
+
+  #tooltip {
+    position: fixed;
+    background: #fff;
+    border: 0.5px solid #b4b2a9;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a1a18;
+    pointer-events: none;
+    display: none;
+    white-space: nowrap;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .dot { cursor: pointer; transition: r 0.35s ease, opacity 0.12s; }
+  .dot:hover { opacity: 1 !important; }
+
+  /* Toggle */
+  .toggle-wrap {
+    display: flex;
+    gap: 0;
+    margin: 1.25rem 0 0.5rem;
+    border: 1px solid #d3d1c7;
+    border-radius: 8px;
+    overflow: hidden;
+    width: fit-content;
+  }
+
+  .toggle-btn {
+    background: none;
+    border: none;
+    padding: 7px 16px;
+    font-size: 12px;
+    font-family: inherit;
+    color: #888780;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    border-right: 1px solid #d3d1c7;
+    white-space: nowrap;
+  }
+
+  .toggle-btn:last-child { border-right: none; }
+
+  .toggle-btn.active {
+    background: #1a1a18;
+    color: #fafaf8;
+  }
+
+  .toggle-btn:hover:not(.active) {
+    background: #f1efe8;
+    color: #2c2c2a;
+  }
+
+  .stat-line {
+    font-size: 11.5px;
+    color: #888780;
+    text-align: center;
+    margin-top: 0.25rem;
+    height: 18px;
+    transition: opacity 0.2s;
+  }
+
+  .stat-line strong { color: #2c2c2a; font-weight: 500; }
+
+  .disclaimer {
+    margin-top: 0.75rem;
+    font-size: 10.5px;
+    color: #b4b2a9;
+    text-align: center;
+    max-width: 540px;
+    line-height: 1.6;
+  }
+
+  .attribution {
+    margin-top: 1.5rem;
+    font-size: 11px;
+    color: #b4b2a9;
+    text-align: center;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body { background: #1a1a18; color: #f1efe8; }
+    h1 { color: #f1efe8; }
+    #tooltip { background: #2c2c2a; border-color: #5f5e5a; color: #f1efe8; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+    .toggle-wrap { border-color: #5f5e5a; }
+    .toggle-btn { color: #5f5e5a; border-right-color: #5f5e5a; }
+    .toggle-btn.active { background: #f1efe8; color: #1a1a18; }
+    .toggle-btn:hover:not(.active) { background: #2c2c2a; color: #d3d1c7; }
+    .stat-line { color: #5f5e5a; }
+    .stat-line strong { color: #d3d1c7; }
+    .disclaimer { color: #5f5e5a; }
+    .attribution { color: #5f5e5a; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Reality TV: 2004–2024</h1>
+
+<div class="chart-wrap">
+<div id="tooltip"></div>
+<svg id="qchart" viewBox="-30 0 780 600" width="100%" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Grid lines -->
+  <line x1="55" y1="295" x2="668" y2="295" stroke="#88878038" stroke-width="1"/>
+  <line x1="362" y1="535" x2="362" y2="42" stroke="#88878038" stroke-width="1"/>
+
+  <!-- Axis labels -->
+  <text x="48" y="299" font-size="11" font-weight="500" fill="#5f5e5a" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" text-anchor="end">&#8592; Lowbrow</text>
+  <text x="671" y="299" font-size="11" font-weight="500" fill="#5f5e5a" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" text-anchor="start">Highbrow &#8594;</text>
+  <text x="362" y="34" font-size="11" font-weight="500" fill="#5f5e5a" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" text-anchor="middle">&#8593; Wholesome</text>
+  <text x="362" y="552" font-size="11" font-weight="500" fill="#5f5e5a" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" text-anchor="middle">&#8595; Depraved</text>
+
+  <!-- Quadrant totals — updated by JS per mode -->
+  <text id="qt-lw" x="357" y="290" font-size="10" font-weight="500" fill="#1D9E75bb" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" text-anchor="end">162.5M</text>
+  <text id="qt-hw" x="367" y="290" font-size="10" font-weight="500" fill="#534AB7bb" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" text-anchor="start">86.8M</text>
+  <text id="qt-ld" x="357" y="308" font-size="10" font-weight="500" fill="#D85A30bb" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" text-anchor="end">148.4M</text>
+  <text id="qt-hd" x="367" y="308" font-size="10" font-weight="500" fill="#D4537Ebb" font-family="-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif" text-anchor="start">8.5M</text>
+
+  <!-- Dots rendered by JS -->
+</svg>
+</div>
+
+<div class="toggle-wrap">
+  <button class="toggle-btn active" data-mode="peak">Peak viewership</button>
+  <button class="toggle-btn" data-mode="cum">Est. cumulative viewership</button>
+  <button class="toggle-btn" data-mode="eps">Episode count</button>
+</div>
+
+<p class="stat-line" id="stat-line">
+  Combined peak viewership across all 70 shows: <strong>452M</strong>
+</p>
+
+<p class="disclaimer" id="disclaimer-text">
+  Peak viewership: dot area ∝ peak or typical audience. Broadcast = live+same-day Nielsen; streaming = reported unique viewers/households. Hover any dot for details.
+</p>
+
+<p class="attribution">Made by Shaya Bendix Lyon with the help of <a href="https://claude.ai" style="color:inherit;">Claude.ai</a></p>
+
+<script>
+const shows = [
+  {name:"America's Got Talent", avg:10, eps:489, cum:4890, rp:16.3, re:22.1, rc:19.6, q:"lw", fill:"#1D9E75", cx:105, cy:172},
+  {name:"The Voice", avg:7, eps:560, cum:3920, rp:13.6, re:23.7, rc:17.6, q:"lw", fill:"#1D9E75", cx:136, cy:202},
+  {name:"The Masked Singer", avg:11, eps:130, cum:1430, rp:17.1, re:11.4, rc:10.6, q:"lw", fill:"#1D9E75", cx:120, cy:110},
+  {name:"Nailed It!", avg:3, eps:42, cum:126, rp:8.9, re:6.5, rc:3.2, q:"lw", fill:"#1D9E75", cx:162, cy:142},
+  {name:"MasterChef Junior", avg:4, eps:80, cum:320, rp:10.3, re:8.9, rc:5.0, q:"lw", fill:"#1D9E75", cx:112, cy:72},
+  {name:"Lego Masters", avg:3, eps:48, cum:144, rp:8.9, re:6.9, rc:3.4, q:"lw", fill:"#1D9E75", cx:168, cy:88},
+  {name:"The Amazing Race", avg:6, eps:468, cum:2808, rp:12.6, re:21.6, rc:14.9, q:"lw", fill:"#1D9E75", cx:155, cy:225},
+  {name:"Survivor", avg:15, eps:760, cum:11400, rp:19.9, re:27.6, rc:30.0, q:"lw", fill:"#1D9E75", cx:180, cy:295},
+  {name:"Project Runway", avg:2.5, eps:290, cum:725, rp:8.1, re:17.0, rc:7.6, q:"lw", fill:"#1D9E75", cx:230, cy:212},
+  {name:"Top Chef", avg:3, eps:250, cum:750, rp:8.9, re:15.8, rc:7.7, q:"lw", fill:"#1D9E75", cx:300, cy:205},
+  {name:"Dancing with the Stars", avg:10, eps:340, cum:3400, rp:16.3, re:18.4, rc:16.4, q:"lw", fill:"#1D9E75", cx:144, cy:155},
+  {name:"Strictly Come Dancing", avg:12, eps:280, cum:3360, rp:17.8, re:16.7, rc:16.3, q:"lw", fill:"#1D9E75", cx:185, cy:135},
+  {name:"American Ninja Warrior", avg:5, eps:220, cum:1100, rp:11.5, re:14.8, rc:9.3, q:"lw", fill:"#1D9E75", cx:200, cy:175},
+  {name:"House Hunters", avg:3, eps:280, cum:840, rp:8.9, re:16.7, rc:8.1, q:"lw", fill:"#1D9E75", cx:92, cy:228},
+  {name:"Love It or List It", avg:2, eps:240, cum:480, rp:7.3, re:15.5, rc:6.2, q:"lw", fill:"#1D9E75", cx:118, cy:250},
+  {name:"Property Brothers", avg:2, eps:200, cum:400, rp:7.3, re:14.1, rc:5.6, q:"lw", fill:"#1D9E75", cx:82, cy:268},
+  {name:"Tiny House Nation", avg:1, eps:48, cum:48, rp:5.1, re:6.9, rc:3.0, q:"lw", fill:"#1D9E75", cx:100, cy:202},
+  {name:"Alone", avg:2, eps:120, cum:240, rp:7.3, re:11.0, rc:4.4, q:"lw", fill:"#1D9E75", cx:242, cy:255},
+  {name:"Beating Bobby Flay", avg:1.5, eps:240, cum:360, rp:6.3, re:15.5, rc:5.3, q:"lw", fill:"#1D9E75", cx:212, cy:252},
+  {name:"I'm a Celebrity...Get Me Out of Here!", avg:12, eps:220, cum:2640, rp:17.8, re:14.8, rc:14.4, q:"lw", fill:"#1D9E75", cx:162, cy:275},
+  {name:"Duck Dynasty", avg:12, eps:130, cum:1560, rp:17.8, re:11.4, rc:11.1, q:"lw", fill:"#1D9E75", cx:72, cy:185},
+  {name:"Dating Around", avg:1.5, eps:12, cum:18, rp:6.3, re:3.5, rc:3.0, q:"lw", fill:"#1D9E75", cx:265, cy:232},
+  {name:"Kitchen Nightmares UK", avg:4, eps:56, cum:224, rp:10.3, re:7.5, rc:4.2, q:"lw", fill:"#1D9E75", cx:248, cy:275},
+  {name:"American Idol", avg:15, eps:600, cum:9000, rp:19.9, re:24.5, rc:26.7, q:"lw", fill:"#1D9E75", cx:218, cy:185},
+  {name:"The Great British Baking Show", avg:10, eps:170, cum:1700, rp:16.3, re:13.0, rc:11.6, q:"hw", fill:"#534AB7", cx:472, cy:85},
+  {name:"Terrace House", avg:1, eps:115, cum:115, rp:5.1, re:10.7, rc:3.0, q:"hw", fill:"#534AB7", cx:370, cy:98},
+  {name:"The Great Pottery Throw Down", avg:1.5, eps:60, cum:90, rp:6.3, re:7.7, rc:3.0, q:"hw", fill:"#534AB7", cx:496, cy:118},
+  {name:"Abstract: The Art of Design", avg:0.8, eps:14, cum:11, rp:4.6, re:3.7, rc:3.0, q:"hw", fill:"#534AB7", cx:600, cy:78},
+  {name:"Chef's Table", avg:2, eps:35, cum:70, rp:7.3, re:5.9, rc:3.0, q:"hw", fill:"#534AB7", cx:562, cy:125},
+  {name:"The Last Dance", avg:17, eps:10, cum:170, rp:21.2, re:3.2, rc:3.7, q:"hw", fill:"#534AB7", cx:528, cy:168},
+  {name:"Making a Murderer", avg:19, eps:16, cum:304, rp:22.4, re:4.0, rc:4.9, q:"hw", fill:"#534AB7", cx:582, cy:215},
+  {name:"Wild Wild Country", avg:5, eps:6, cum:30, rp:11.5, re:3.0, rc:3.0, q:"hw", fill:"#534AB7", cx:618, cy:185},
+  {name:"Blown Away", avg:2, eps:24, cum:48, rp:7.3, re:4.9, rc:3.0, q:"hw", fill:"#534AB7", cx:435, cy:138},
+  {name:"Baking Impossible", avg:1.5, eps:6, cum:9, rp:6.3, re:3.0, rc:3.0, q:"hw", fill:"#534AB7", cx:518, cy:102},
+  {name:"The Big Flower Fight", avg:1, eps:6, cum:6, rp:5.1, re:3.0, rc:3.0, q:"hw", fill:"#534AB7", cx:452, cy:165},
+  {name:"Glow Up", avg:1.5, eps:40, cum:60, rp:6.3, re:6.3, rc:3.0, q:"hw", fill:"#534AB7", cx:415, cy:155},
+  {name:"Next in Fashion", avg:2, eps:18, cum:36, rp:7.3, re:4.2, rc:3.0, q:"hw", fill:"#534AB7", cx:432, cy:122},
+  {name:"Building the Band", avg:1, eps:8, cum:8, rp:5.1, re:3.0, rc:3.0, q:"hw", fill:"#534AB7", cx:450, cy:102},
+  {name:"The Traitors", avg:3, eps:24, cum:72, rp:8.9, re:4.9, rc:3.0, q:"hw", fill:"#534AB7", cx:462, cy:212},
+  {name:"RuPaul's Drag Race", avg:3, eps:240, cum:720, rp:8.9, re:15.5, rc:7.5, q:"hw", fill:"#534AB7", cx:422, cy:178},
+  {name:"Queer Eye", avg:5, eps:80, cum:400, rp:11.5, re:8.9, rc:5.6, q:"hw", fill:"#534AB7", cx:375, cy:145},
+  {name:"Indian Matchmaking", avg:4, eps:24, cum:96, rp:10.3, re:4.9, rc:3.0, q:"hw", fill:"#534AB7", cx:378, cy:182},
+  {name:"Jewish Matchmaking", avg:1, eps:8, cum:8, rp:5.1, re:3.0, rc:3.0, q:"hw", fill:"#534AB7", cx:365, cy:212},
+  {name:"The Vow", avg:2, eps:9, cum:18, rp:7.3, re:3.0, rc:3.0, q:"hw", fill:"#534AB7", cx:548, cy:248},
+  {name:"Keep Sweet: Pray and Obey", avg:2, eps:4, cum:8, rp:7.3, re:3.0, rc:3.0, q:"hw", fill:"#534AB7", cx:575, cy:255},
+  {name:"Escaping Twin Flames", avg:1.5, eps:4, cum:6, rp:6.3, re:3.0, rc:3.0, q:"hw", fill:"#534AB7", cx:608, cy:240},
+  {name:"Hell's Kitchen", avg:6, eps:340, cum:2040, rp:12.6, re:18.4, rc:12.7, q:"amb", fill:"#888780", cx:205, cy:325},
+  {name:"Kitchen Nightmares US", avg:6, eps:92, cum:552, rp:12.6, re:9.6, rc:6.6, q:"amb", fill:"#888780", cx:258, cy:315},
+  {name:"Big Brother", avg:6, eps:900, cum:5400, rp:12.6, re:30.0, rc:20.6, q:"amb", fill:"#888780", cx:185, cy:345},
+  {name:"Keeping Up with the Kardashians", avg:2, eps:220, cum:440, rp:7.3, re:14.8, rc:5.9, q:"amb", fill:"#888780", cx:162, cy:368},
+  {name:"The X Factor", avg:9, eps:240, cum:2160, rp:15.4, re:15.5, rc:13.1, q:"amb", fill:"#888780", cx:140, cy:328},
+  {name:"The Apprentice", avg:10, eps:230, cum:2300, rp:16.3, re:15.2, rc:13.5, q:"amb", fill:"#888780", cx:285, cy:335},
+  {name:"America's Next Top Model", avg:4, eps:280, cum:1120, rp:10.3, re:16.7, rc:9.4, q:"amb", fill:"#888780", cx:222, cy:352},
+  {name:"The Real World", avg:3, eps:340, cum:1020, rp:8.9, re:18.4, rc:9.0, q:"amb", fill:"#888780", cx:165, cy:315},
+  {name:"Shark Tank", avg:4, eps:340, cum:1360, rp:10.3, re:18.4, rc:10.4, q:"hd", fill:"#D4537E", cx:492, cy:325},
+  {name:"Intervention", avg:2, eps:280, cum:560, rp:7.3, re:16.7, rc:6.6, q:"hd", fill:"#D4537E", cx:418, cy:362},
+  {name:"My 600-lb Life", avg:2.5, eps:200, cum:500, rp:8.1, re:14.1, rc:6.3, q:"hd", fill:"#D4537E", cx:392, cy:400},
+  {name:"The Bachelor", avg:7, eps:340, cum:2380, rp:13.6, re:18.4, rc:13.7, q:"ld", fill:"#D85A30", cx:138, cy:400},
+  {name:"Love Island USA", avg:0.5, eps:80, cum:40, rp:3.6, re:8.9, rc:3.0, q:"ld", fill:"#D85A30", cx:97, cy:432},
+  {name:"Temptation Island", avg:1, eps:60, cum:60, rp:5.1, re:7.7, rc:3.0, q:"ld", fill:"#D85A30", cx:124, cy:462},
+  {name:"Too Hot to Handle", avg:30, eps:40, cum:1200, rp:28.2, re:6.3, rc:9.7, q:"ld", fill:"#D85A30", cx:84, cy:472},
+  {name:"Are You the One?", avg:1.5, eps:90, cum:135, rp:6.3, re:9.5, rc:3.3, q:"ld", fill:"#D85A30", cx:165, cy:452},
+  {name:"Jersey Shore", avg:9, eps:160, cum:1440, rp:15.4, re:12.6, rc:10.7, q:"ld", fill:"#D85A30", cx:108, cy:408},
+  {name:"90 Day Fiancé", avg:2, eps:160, cum:320, rp:7.3, re:12.6, rc:5.0, q:"ld", fill:"#D85A30", cx:222, cy:412},
+  {name:"Real Housewives (franchise)", avg:2, eps:600, cum:1200, rp:7.3, re:24.5, rc:9.7, q:"ld", fill:"#D85A30", cx:185, cy:385},
+  {name:"Vanderpump Rules", avg:1.5, eps:180, cum:270, rp:6.3, re:13.4, rc:4.6, q:"ld", fill:"#D85A30", cx:208, cy:365},
+  {name:"Naked and Afraid", avg:2, eps:180, cum:360, rp:7.3, re:13.4, rc:5.3, q:"ld", fill:"#D85A30", cx:145, cy:480},
+  {name:"Million Dollar Nanny", avg:0.8, eps:24, cum:19, rp:4.6, re:4.9, rc:3.0, q:"ld", fill:"#D85A30", cx:250, cy:395},
+  {name:"Dance Moms", avg:3, eps:180, cum:540, rp:8.9, re:13.4, rc:6.5, q:"ld", fill:"#D85A30", cx:270, cy:415},
+  {name:"The Challenge", avg:1.5, eps:500, cum:750, rp:6.3, re:22.4, rc:7.7, q:"ld", fill:"#D85A30", cx:195, cy:425},
+  {name:"Geordie Shore", avg:1, eps:280, cum:280, rp:5.1, re:16.7, rc:4.7, q:"ld", fill:"#D85A30", cx:72, cy:452},
+  {name:"Tiger King", avg:34, eps:13, cum:442, rp:30.0, re:3.6, rc:5.9, q:"ld", fill:"#D85A30", cx:285, cy:375},
+  {name:"Don't F**k with Cats", avg:10, eps:3, cum:30, rp:16.3, re:3.0, rc:3.0, q:"ld", fill:"#D85A30", cx:255, cy:435},
+  {name:"Bad Vegan", avg:5, eps:4, cum:20, rp:11.5, re:3.0, rc:3.0, q:"ld", fill:"#D85A30", cx:275, cy:455},
+  {name:"LuLaRich", avg:3, eps:4, cum:12, rp:8.9, re:3.0, rc:3.0, q:"ld", fill:"#D85A30", cx:302, cy:420},
+  {name:"Love is Blind", avg:30, eps:60, cum:1800, rp:28.2, re:7.7, rc:11.9, q:"ld", fill:"#D85A30", cx:114, cy:388},
+  {name:"Married at First Sight", avg:2, eps:220, cum:440, rp:7.3, re:14.8, rc:5.9, q:"ld", fill:"#D85A30", cx:93, cy:405},
+  {name:"MILF Manor", avg:0.8, eps:8, cum:6, rp:4.6, re:3.0, rc:3.0, q:"ld", fill:"#993C1D", cx:74, cy:510},
+  {name:"Ex on the Beach", avg:0.8, eps:180, cum:144, rp:4.6, re:13.4, rc:3.4, q:"ld", fill:"#993C1D", cx:62, cy:490},
+];
+
+// Quadrant totals per mode
+const qtTotals = {
+  peak: { lw:"162.5M", hw:"86.8M", ld:"148.4M", hd:"8.5M",
+          stat:'Combined peak viewership across all 70 shows: <strong>452M</strong>' },
+  cum:  { lw:"50,183M", hw:"3,985M", ld:"11,889M", hd:"2,420M",
+          stat:'Est. cumulative viewership across all 70 shows: <strong>83,509M</strong> <span style="font-weight:400;color:#b4b2a9">(avg viewers × episodes)</span>' },
+  eps:  { lw:"6,103 eps", hw:"921 eps", ld:"3,366 eps", hd:"820 eps",
+          stat:'Total episodes across all 70 shows: <strong>13,852</strong>' },
+};
+
+const disclaimers = {
+  peak: "Peak viewership: dot area ∝ peak or typical audience. Broadcast = live+same-day Nielsen; streaming = reported unique viewers/households. Hover any dot for details.",
+  cum:  "Estimated cumulative viewership = avg viewers × episode count. A rough proxy for total cultural exposure — not a published figure. Streaming shows are likely undercounted; long-running broadcast shows may be overcounted. Use as a relative signal, not an absolute measure.",
+  eps:  "Episode count through 2024. Dot area ∝ number of episodes on a square-root scale. A measure of longevity and total output, independent of how many people watched. Hover any dot for details.",
+};
+
+const svg = document.getElementById("qchart");
+let currentMode = "peak";
+
+// Render dots
+shows.forEach(s => {
+  const el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  el.setAttribute("class", "dot");
+  el.setAttribute("cx", s.cx);
+  el.setAttribute("cy", s.cy);
+  el.setAttribute("r", s.rp);
+  el.setAttribute("fill", s.fill);
+  el.setAttribute("opacity", "0.72");
+  el.dataset.name = s.name;
+  el.dataset.avg = s.avg;
+  el.dataset.eps = s.eps;
+  el.dataset.cum = s.cum;
+  el.dataset.rp = s.rp;
+  el.dataset.re = s.re;
+  el.dataset.rc = s.rc;
+  svg.appendChild(el);
+});
+
+// Tooltip
+const tooltip = document.getElementById("tooltip");
+document.querySelectorAll(".dot").forEach(dot => {
+  dot.addEventListener("mouseenter", () => {
+    const name = dot.dataset.name;
+    const avg = dot.dataset.avg;
+    const eps = dot.dataset.eps;
+    const cum = parseInt(dot.dataset.cum).toLocaleString();
+    let detail = "";
+    if (currentMode === "peak")  detail = `~${avg}M avg viewers`;
+    if (currentMode === "cum")   detail = `~${cum}M est. cumulative`;
+    if (currentMode === "eps")   detail = `${parseInt(eps).toLocaleString()} episodes`;
+    tooltip.innerHTML = `<span style="font-weight:600">${name}</span> &nbsp;<span style="font-weight:400;color:#888780">${detail}</span>`;
+    tooltip.style.display = "block";
+  });
+  dot.addEventListener("mousemove", e => {
+    tooltip.style.left = (e.clientX + 14) + "px";
+    tooltip.style.top  = (e.clientY - 36) + "px";
+  });
+  dot.addEventListener("mouseleave", () => {
+    tooltip.style.display = "none";
+  });
+});
+
+// Mode switching
+function setMode(mode) {
+  currentMode = mode;
+  const rKey = mode === "peak" ? "rp" : mode === "cum" ? "rc" : "re";
+  document.querySelectorAll(".dot").forEach(dot => {
+    dot.setAttribute("r", dot.dataset[rKey]);
+  });
+  // Update quadrant labels
+  const qt = qtTotals[mode];
+  document.getElementById("qt-lw").textContent = qt.lw;
+  document.getElementById("qt-hw").textContent = qt.hw;
+  document.getElementById("qt-ld").textContent = qt.ld;
+  document.getElementById("qt-hd").textContent = qt.hd;
+  // Update stat line
+  document.getElementById("stat-line").innerHTML = qt.stat;
+  // Update disclaimer
+  document.getElementById("disclaimer-text").textContent = disclaimers[mode];
+  // Update buttons
+  document.querySelectorAll(".toggle-btn").forEach(b => {
+    b.classList.toggle("active", b.dataset.mode === mode);
+  });
+}
+
+document.querySelectorAll(".toggle-btn").forEach(btn => {
+  btn.addEventListener("click", () => setMode(btn.dataset.mode));
+});
+</script>
+
+</body>
+</html>
