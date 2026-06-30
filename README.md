@@ -1,19 +1,14 @@
 # Reality TV: 2004–2024
 
-This is an interactive bubble chart mapping ~70 English-language reality TV shows across two axes: **highbrow vs. lowbrow** and **wholesome vs. depraved**. Dot size is scaled to show viewership data. You can toggle between three different ways of measuring the landscape.
+This is an interactive bubble chart mapping ~70 English-language reality TV shows across two axes: highbrow/lowbrow (X axis) and wholesome/depraved (Y axis). Dot size is scaled to show viewership data. You can toggle between three different ways of measuring the landscape. Each dot represents a show. Position reflects editorial judgment. Size reflects data about viewership and longevity.
 
+Highbrow/lowbrow: Does the show's intent assume a curious, intelligent audience, or is it pure entertainment?
 
-Each dot is a reality TV show. Position reflects editorial judgment. Size reflects data about viewership and longevity.
-
-
-**Horizontal axis is lowbrow v. highbrow**. Does the show's intent assume a curious, intelligent audience, or is it pure entertainment?
-
-**Vertical axis is wholesome v. depraved** Does the show profit from exploiting or humiliating its participants? Sexual content and manufactured degradation pull toward depraved; exploitation of vulnerable people weighs most heavily.
-
+Wholesome/depraved: Does the show profit from exploiting or humiliating its participants? The heaviest weight is exploitation of vulnerable people. Sexual content and manufactured degradation also pull a show toward the depraved end of things. 
 
 ### Modes
 
-Use the buttons under the chart to toggle between modes. All three use the same scale: **dot area is proportional to the underlying value**, calibrated so the largest show in each mode fills the maximum radius. There is no log compression.
+Use the buttons under the chart to toggle between modes. All three use the same scale: dot area is proportional to the underlying value, calibrated so the largest show in each mode fills the maximum radius. There is no log compression.
 
 #### Peak viewership
 Dot size = peak or typical audience for the show's best period.
@@ -40,7 +35,7 @@ This is an verifiable measure of longevity and output, and we can be more confid
 The small numbers near the axis intersection show the sum of peak viewership / episode count /cumulative viewership) for all shows in that quadrant. The grand total across all 70 shows is displayed below the chart.
 
 
-### Methodology notes
+### Methodology
 
 - Placement is editorial, not empirical. Every show's position on both axes reflects judgment calls, not a scoring rubric. Reasonable people will disagree with individual placements.
 - The viewership data is mixed-methodology. Broadcast Nielsen numbers, UK BARB figures, Netflix household counts, and cable ratings are not directly comparable. The chart treats them as best-available proxies. Where a figure is estimated (e.g. Netflix shows pre-2023, when Netflix began releasing data), the tooltip notes this.
